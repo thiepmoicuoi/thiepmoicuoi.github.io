@@ -1,0 +1,598 @@
+/* ========== RESET & BASE ========== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Playfair Display', Georgia, serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ========== CSS VARIABLES ========== */
+:root {
+  --cream: #FDF8F3;
+  --cream-light: #FFF8F0;
+  --cream-warm: #FDF0E0;
+  --pink-pastel: #F5D0C5;
+  --pink-pastel-dark: #E8C4B8;
+  --yellow-light: #F7E7CE;
+  --yellow-light-2: #FDF0E0;
+  --accent-red: #C41E3A;
+  --text: #5c4a42;
+  --text-muted: #8b7355;
+  --font-display: 'Great Vibes', cursive;
+  --font-body: 'Playfair Display', Georgia, serif;
+  --shadow-soft: 0 8px 32px rgba(92, 74, 66, 0.12);
+  --shadow-photo: 0 12px 40px rgba(92, 74, 66, 0.18);
+  --radius: 12px;
+  --radius-lg: 20px;
+}
+
+/* ========== PAGE WRAPPER & SECTIONS ========== */
+.page-wrapper {
+  scroll-snap-type: y mandatory;
+  min-height: 100vh;
+}
+
+.section {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  scroll-snap-align: start;
+  position: relative;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+}
+
+.section.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== SECTION 1 – INTRO ========== */
+.section-intro {
+  background: linear-gradient(180deg, var(--cream-light) 0%, var(--yellow-light) 50%, var(--pink-pastel) 100%);
+  position: relative;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--text-muted);
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.scroll-indicator:hover {
+  opacity: 1;
+  color: var(--text);
+}
+
+.scroll-indicator-icon {
+  width: 24px;
+  height: 24px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(6px); }
+}
+
+/* ========== Nút nổi: nhạc (trái) & cuộn xuống (phải) ========== */
+.floating-btn {
+  position: fixed;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 248, 240, 0.95);
+  color: var(--text);
+  border: 1px solid rgba(232, 196, 184, 0.6);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, color 0.2s;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.floating-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 36px rgba(92, 74, 66, 0.18);
+  color: var(--text);
+}
+
+.floating-btn:active {
+  transform: scale(0.98);
+}
+
+.floating-btn-music {
+  left: 1rem;
+  bottom: 1.25rem;
+}
+
+.floating-btn-music.is-paused .icon-music {
+  opacity: 0.5;
+}
+
+.floating-btn-music.is-paused::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 28px;
+  height: 2px;
+  background: var(--text);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  pointer-events: none;
+}
+
+.floating-btn-scroll {
+  right: 1rem;
+  bottom: 1.25rem;
+}
+
+.icon-music {
+  width: 26px;
+  height: 26px;
+  transition: opacity 0.2s;
+}
+
+.floating-scroll-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  margin-top: -4px;
+}
+
+@media (max-width: 768px) {
+  .floating-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .floating-btn-music {
+    left: 0.75rem;
+    bottom: 1rem;
+  }
+
+  .floating-btn-scroll {
+    right: 0.75rem;
+    bottom: 1rem;
+  }
+
+  .icon-music {
+    width: 22px;
+    height: 22px;
+  }
+
+  .floating-btn-music.is-paused::after {
+    width: 24px;
+  }
+}
+
+.intro-content {
+  text-align: center;
+  max-width: 90vw;
+}
+
+.intro-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+
+.intro-divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--text-muted), transparent);
+  margin: 0.75rem auto 1rem;
+  border-radius: 1px;
+}
+
+.intro-recipient {
+  display: none;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
+.intro-recipient.visible {
+  display: block;
+}
+
+.intro-names {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.intro-date {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+}
+
+/* ----- Ảnh cưới (khung trang trí) ----- */
+.photo-frame-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.photo-frame {
+  position: relative;
+  width: min(320px, 85vw);
+  padding: 12px;
+  background: linear-gradient(145deg, var(--cream-light) 0%, var(--pink-pastel) 100%);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-photo),
+    0 0 0 1px rgba(232, 196, 184, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.photo-frame::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: calc(var(--radius-lg) - 4px);
+  pointer-events: none;
+}
+
+.wedding-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 220px;
+  object-fit: cover;
+  border-radius: calc(var(--radius-lg) - 8px);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.7s ease-out 0.2s, transform 0.7s ease-out 0.2s;
+}
+
+.section-intro.section-visible .wedding-photo {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== SECTION 2 – GIA ĐÌNH ========== */
+.section-family {
+  background: linear-gradient(180deg, var(--pink-pastel) 0%, var(--cream) 50%, var(--yellow-light) 100%);
+}
+
+.family-content {
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+}
+
+.family-title {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.family-names {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  color: var(--text);
+  margin-bottom: 3rem;
+  line-height: 1.4;
+}
+
+.family-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 3rem;
+  align-items: start;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.family-col {
+  background: rgba(255, 248, 240, 0.7);
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(8px);
+}
+
+.col-title {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.col-text {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.8vw, 1rem);
+  color: var(--text);
+  line-height: 1.8;
+}
+
+/* ========== SECTION 3 – BỮA TIỆC ========== */
+.section-party {
+  background: linear-gradient(180deg, var(--yellow-light) 0%, var(--cream) 50%, var(--cream-light) 100%);
+}
+
+.party-content {
+  text-align: center;
+  max-width: 700px;
+  width: 100%;
+  background: rgba(255, 248, 240, 0.85);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(232, 196, 184, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+.party-title {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.party-info {
+  margin-bottom: 1.5rem;
+}
+
+.party-time,
+.party-date {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.party-lunar {
+  font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.party-venue {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--text);
+}
+
+/* ----- Google Map ----- */
+.map-wrapper {
+  margin: 1.5rem 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  background: var(--cream);
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.map-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.map-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--pink-pastel);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.map-link:hover {
+  background: var(--pink-pastel-dark);
+  transform: translateY(-2px);
+}
+
+/* ----- Calendar ----- */
+.calendar-wrapper {
+  margin-top: 2rem;
+}
+
+.calendar {
+  background: var(--cream-light);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-soft);
+  max-width: 360px;
+  margin: 0 auto;
+  border: 1px solid rgba(232, 196, 184, 0.5);
+}
+
+.calendar-header {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 6px;
+  position: relative;
+}
+
+.cal-day.empty {
+  background: transparent;
+  color: transparent;
+}
+
+.cal-day-wedding {
+  background: rgba(196, 30, 58, 0.12);
+  color: var(--accent-red);
+  font-weight: 600;
+  border: 2px solid var(--accent-red);
+  animation: pulse-heart 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-heart {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(196, 30, 58, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(196, 30, 58, 0);
+  }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .section {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 1.25rem 1rem 1.5rem;
+  }
+
+  .intro-date {
+    margin-bottom: 2rem;
+  }
+
+  .photo-frame-wrapper {
+    margin-top: 2rem;
+  }
+
+  .photo-frame {
+    width: min(280px, 90vw);
+  }
+
+  .wedding-photo {
+    min-height: 180px;
+  }
+
+  .family-columns {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 1rem;
+    max-width: 100%;
+  }
+
+  .family-col {
+    padding: 1rem 0.75rem;
+  }
+
+  .family-names {
+    margin-bottom: 2rem;
+  }
+
+  .calendar {
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  .cal-day {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-title {
+    font-size: 2rem;
+  }
+
+  .intro-names {
+    font-size: 1.75rem;
+  }
+
+  .family-names {
+    font-size: 1.85rem;
+  }
+
+  .calendar-weekdays {
+    font-size: 0.65rem;
+  }
+
+  .cal-day {
+    font-size: 0.75rem;
+  }
+}

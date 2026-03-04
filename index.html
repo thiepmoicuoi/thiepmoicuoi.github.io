@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thư Mời Cưới - Hồng Xuân & Quang Thiện</title>
+  <!-- Google Fonts: Great Vibes (trang trí), Playfair Display (nội dung) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <!-- AOS - Animate On Scroll -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Nhạc nền: phát khi mở trang (nếu trình duyệt chặn autoplay, nhạc sẽ bắt đầu khi bạn chạm/click vào trang) -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="yeu5.mp3" type="audio/mpeg" />
+  </audio>
+  <div class="page-wrapper">
+    <!-- ========== SECTION 1 – INTRO ========== -->
+    <section id="intro" class="section section-intro section-visible">
+      <div class="intro-content">
+        <h1 class="intro-title">Thư Mời Cưới</h1>
+        <div class="intro-divider" aria-hidden="true"></div>
+        <p class="intro-recipient" id="intro-recipient" aria-hidden="true"></p>
+        <p class="intro-names">Hồng Xuân & Quang Thiện</p>
+        <p class="intro-date">14.04.2026</p>
+
+        <div class="photo-frame-wrapper">
+          <div class="photo-frame">
+            <!-- Ảnh cưới: đổi src tại đây (vd: images/wedding.jpg) -->
+            <img src="test.jpeg" alt="Ảnh cưới" class="wedding-photo" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SECTION 2 – GIA ĐÌNH ========== -->
+    <section id="family" class="section section-family">
+      <div class="family-content">
+        <h2 class="family-title" data-aos="fade-down" data-aos-duration="800">THAM DỰ LỄ VU QUY CỦA GIA ĐÌNH CHÚNG TÔI</h2>
+        <p class="family-names" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+          Lữ Hồng Xuân<br />&<br />Phạm Quang Thiện
+        </p>
+
+        <div class="family-columns">
+          <div class="family-col family-col-left" data-aos="fade-right" data-aos-duration="900" data-aos-easing="ease-out">
+            <h3 class="col-title">Nhà Gái</h3>
+            <p class="col-text">ÔNG LỮ MỌC HƯNG</p>
+            <p class="col-text">BÀ PHAN THỊ NHUNG</p>
+          </div>
+          <div class="family-col family-col-right" data-aos="fade-left" data-aos-duration="900" data-aos-easing="ease-out">
+            <h3 class="col-title">Nhà Trai</h3>
+            <p class="col-text">ÔNG PHẠM VĂN MIÊN</p>
+            <p class="col-text" style="opacity:0;">.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SECTION 3 – BỮA TIỆC ========== -->
+    <section id="party" class="section section-party">
+      <div class="party-content">
+        <h2 class="party-title" data-aos="fade-down" data-aos-duration="800">BỮA TIỆC THÂN MẬT</h2>
+
+        <div class="party-info" data-aos="fade-up" data-aos-duration="600">
+          <p class="party-time">11:00 - Thứ Tư</p>
+          <p class="party-date">14.04.2026</p>
+          <p class="party-lunar">(Tức Ngày 23, Tháng 11, Năm Nhâm Ngọ)</p>
+          <p class="party-venue">79, Đường Số 10, An Lạc Bình Tân</p>
+        </div>
+
+        <!-- Google Map: thay src iframe bằng link embed từ Google Maps (Share → Embed) -->
+        <div class="map-wrapper" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+          <iframe
+            class="map-iframe"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.058123456789!2d106.6!3d10.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQyJzAwLjAiTiAxMDbCsDM2JzAwLjAiRQ!5e0!3m2!1svi!2s!4v1234567890"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Địa điểm tiệc cưới"
+          ></iframe>
+          <a
+            class="map-link"
+            href="https://www.google.com/maps/search/79+%C4%90%C6%B0%E1%BB%9Dng+S%E1%BB%91+10,+An+L%E1%BA%A1c+B%C3%ACnh+T%C3%A2n"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Xem chỉ đường trên Google Maps</a>
+        </div>
+
+        <!-- Lịch tháng 4/2026 - ngày 14 khoanh trái tim -->
+        <div class="calendar-wrapper" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+          <div class="calendar">
+            <div class="calendar-header">THÁNG 4 - 2026</div>
+            <div class="calendar-weekdays">
+              <span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span>
+            </div>
+            <div class="calendar-grid">
+              <span class="cal-day empty"></span>
+              <span class="cal-day empty"></span>
+              <span class="cal-day">1</span>
+              <span class="cal-day">2</span>
+              <span class="cal-day">3</span>
+              <span class="cal-day">4</span>
+              <span class="cal-day">5</span>
+              <span class="cal-day">6</span>
+              <span class="cal-day">7</span>
+              <span class="cal-day">8</span>
+              <span class="cal-day">9</span>
+              <span class="cal-day">10</span>
+              <span class="cal-day">11</span>
+              <span class="cal-day">12</span>
+              <span class="cal-day">13</span>
+              <span class="cal-day cal-day-wedding">14</span>
+              <span class="cal-day">15</span>
+              <span class="cal-day">16</span>
+              <span class="cal-day">17</span>
+              <span class="cal-day">18</span>
+              <span class="cal-day">19</span>
+              <span class="cal-day">20</span>
+              <span class="cal-day">21</span>
+              <span class="cal-day">22</span>
+              <span class="cal-day">23</span>
+              <span class="cal-day">24</span>
+              <span class="cal-day">25</span>
+              <span class="cal-day">26</span>
+              <span class="cal-day">27</span>
+              <span class="cal-day">28</span>
+              <span class="cal-day">29</span>
+              <span class="cal-day">30</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Nút nhạc nổi (trái) & nút cuộn xuống nổi (phải) -->
+  <button type="button" id="floating-music" class="floating-btn floating-btn-music" aria-label="Bật/tắt nhạc nền" title="Nhạc nền">
+    <svg class="icon-music" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+    </svg>
+  </button>
+  <a href="#family" id="floating-scroll" class="floating-btn floating-btn-scroll" aria-label="Cuộn xuống" title="Cuộn xuống">
+    <span class="floating-scroll-arrow"></span>
+  </a>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
