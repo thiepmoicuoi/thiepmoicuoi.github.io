@@ -618,10 +618,10 @@ img {
 }
 
 .cal-day-wedding {
-  background: rgba(255, 255, 255, 0.95);
+  background: transparent;
   color: var(--accent-red);
   font-weight: 600;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: none;
   position: relative;
   z-index: 1;
 }
@@ -636,7 +636,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.8em;
+  font-size: 3.2em;
   color: var(--accent-red);
   opacity: 0.25;
   pointer-events: none;
@@ -650,17 +650,17 @@ img {
   font-family: 'Font Awesome 6 Free';
   font-weight: 400;
   position: absolute;
-  inset: -6px;
+  inset: -8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.75em;
+  font-size: 3.2em;
   color: var(--accent-red);
   opacity: 0.95;
   pointer-events: none;
   z-index: 0;
   transform: translateY(2px);
-  -webkit-text-stroke: 2px var(--accent-red);
+  -webkit-text-stroke: 1px var(--accent-red);
   animation: pulse-heart-shape 1.2s ease-in-out infinite;
 }
 
@@ -736,12 +736,12 @@ img {
   }
 
   .cal-day-wedding::before {
-    font-size: 2.4em;
-    inset: -4px;
+    font-size: 2.9em;
+    inset: -6px;
   }
 
   .cal-day-wedding::after {
-    font-size: 2.5em;
+    font-size: 3em;
   }
 }
 
@@ -767,10 +767,10 @@ img {
   }
 
   .cal-day-wedding::before {
-    font-size: 2.1em;
+    font-size: 2.6em;
   }
 
   .cal-day-wedding::after {
-    font-size: 2.2em;
+    font-size: 2.7em;
   }
 }
