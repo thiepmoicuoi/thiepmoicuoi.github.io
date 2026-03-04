@@ -19,6 +19,22 @@ body {
   overflow-x: hidden;
 }
 
+/* Nền gradient liên tục từ đầu đến cuối trang — không ngắt giữa các section */
+.page-wrapper {
+  background: linear-gradient(
+    180deg,
+    var(--cream-light) 0%,
+    var(--yellow-light) 18%,
+    var(--pink-pastel) 35%,
+    var(--cream) 50%,
+    var(--yellow-light) 65%,
+    var(--cream-light) 80%,
+    var(--yellow-light-2) 92%,
+    var(--cream-light) 100%
+  );
+  background-attachment: scroll;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -27,16 +43,20 @@ img {
 
 /* ========== CSS VARIABLES ========== */
 :root {
-  --cream: #FDF8F3;
-  --cream-light: #FFF8F0;
-  --cream-warm: #FDF0E0;
-  --pink-pastel: #F5D0C5;
-  --pink-pastel-dark: #E8C4B8;
-  --yellow-light: #F7E7CE;
-  --yellow-light-2: #FDF0E0;
+  /* Nền kem trung tính */
+  --cream: #f7fbf5;
+  --cream-light: #f9fff6;
+  --cream-warm: #ecf7ea;
+  /* Tông xanh pastel chủ đạo */
+  --pink-pastel: #c4e8cf;
+  --pink-pastel-dark: #9ed3b0;
+  --yellow-light: #d3f0df;
+  --yellow-light-2: #e5f7eb;
+  /* Giữ tim viền đỏ cho điểm nhấn */
   --accent-red: #C41E3A;
-  --text: #5c4a42;
-  --text-muted: #8b7355;
+  /* Chữ nâu đậm, hợp nền xanh-kem */
+  --text: #445040;
+  --text-muted: #70806a;
   --font-display: 'Great Vibes', cursive;
   --font-body: 'Playfair Display', Georgia, serif;
   --shadow-soft: 0 8px 32px rgba(92, 74, 66, 0.12);
@@ -49,6 +69,7 @@ img {
 .page-wrapper {
   scroll-snap-type: y mandatory;
   min-height: 100vh;
+  background-size: 100% 100%;
 }
 
 .section {
@@ -72,7 +93,7 @@ img {
 
 /* ========== SECTION 1 – INTRO ========== */
 .section-intro {
-  background: linear-gradient(180deg, var(--cream-light) 0%, var(--yellow-light) 50%, var(--pink-pastel) 100%);
+  background: transparent;
   position: relative;
 }
 
@@ -172,13 +193,15 @@ img {
   transition: opacity 0.2s;
 }
 
-.floating-scroll-arrow {
-  width: 20px;
-  height: 20px;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  transform: rotate(45deg);
-  margin-top: -4px;
+.icon-scroll {
+  width: 24px;
+  height: 24px;
+  color: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.floating-btn-scroll:hover .icon-scroll {
+  transform: translateY(3px);
 }
 
 @media (max-width: 768px) {
@@ -200,6 +223,11 @@ img {
   .icon-music {
     width: 22px;
     height: 22px;
+  }
+
+  .icon-scroll {
+    width: 20px;
+    height: 20px;
   }
 
   .floating-btn-music.is-paused::after {
@@ -256,7 +284,7 @@ img {
   margin-bottom: 2.5rem;
 }
 
-/* ----- Ảnh cưới (khung trang trí) ----- */
+/* ----- Ảnh cưới (chỉ bo góc, không viền) ----- */
 .photo-frame-wrapper {
   display: flex;
   justify-content: center;
@@ -266,31 +294,16 @@ img {
 
 .photo-frame {
   position: relative;
-  width: min(320px, 85vw);
-  padding: 12px;
-  background: linear-gradient(145deg, var(--cream-light) 0%, var(--pink-pastel) 100%);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-photo),
-    0 0 0 1px rgba(232, 196, 184, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-
-.photo-frame::before {
-  content: '';
-  position: absolute;
-  inset: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: calc(var(--radius-lg) - 4px);
-  pointer-events: none;
+  width: min(480px, 92vw);
 }
 
 .wedding-photo {
   display: block;
   width: 100%;
   height: auto;
-  min-height: 220px;
+  min-height: 320px;
   object-fit: cover;
-  border-radius: calc(var(--radius-lg) - 8px);
+  border-radius: var(--radius-lg);
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.7s ease-out 0.2s, transform 0.7s ease-out 0.2s;
@@ -303,7 +316,7 @@ img {
 
 /* ========== SECTION 2 – GIA ĐÌNH ========== */
 .section-family {
-  background: linear-gradient(180deg, var(--pink-pastel) 0%, var(--cream) 50%, var(--yellow-light) 100%);
+  background: transparent;
 }
 
 .family-content {
@@ -314,11 +327,11 @@ img {
 
 .family-title {
   font-family: var(--font-body);
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-size: clamp(1.15rem, 2.8vw, 1.5rem);
   letter-spacing: 0.2em;
   color: var(--text-muted);
   margin-bottom: 1.5rem;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .family-names {
@@ -362,12 +375,22 @@ img {
   line-height: 1.8;
 }
 
-/* ========== SECTION 3 – BỮA TIỆC ========== */
+/* ========== SECTION 3 – BỮA TIỆC & NGÀY CƯỚI ========== */
 .section-party {
-  background: linear-gradient(180deg, var(--yellow-light) 0%, var(--cream) 50%, var(--cream-light) 100%);
+  background: transparent;
 }
 
-.party-content {
+.party-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 2rem;
+  align-items: stretch;
+  max-width: 900px;
+  width: 100%;
+}
+
+.party-content,
+.calendar-content {
   text-align: center;
   max-width: 700px;
   width: 100%;
@@ -395,7 +418,8 @@ img {
 .party-time,
 .party-date {
   font-family: var(--font-body);
-  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  font-weight: 700;
   color: var(--text);
   margin-bottom: 0.25rem;
 }
@@ -410,6 +434,49 @@ img {
   font-family: var(--font-body);
   font-size: clamp(1rem, 2vw, 1.15rem);
   color: var(--text);
+}
+
+.calendar-title {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+/* ========== SECTION 5 – BẢN ĐỒ ========== */
+.section-map {
+  background: transparent;
+}
+
+.map-content {
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  background: rgba(255, 248, 240, 0.9);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(158, 211, 176, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+.map-title {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.map-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--text);
+  margin-bottom: 1.25rem;
 }
 
 /* ----- Google Map ----- */
@@ -511,11 +578,29 @@ img {
 }
 
 .cal-day-wedding {
-  background: rgba(196, 30, 58, 0.12);
+  background: transparent;
   color: var(--accent-red);
   font-weight: 600;
-  border: 2px solid var(--accent-red);
+  border: none;
+  position: relative;
   animation: pulse-heart 1.5s ease-in-out infinite;
+}
+
+/* Trái tim viền (Font Awesome) — nằm phía sau số */
+.cal-day-wedding::before {
+  content: '\f004';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 400;
+  position: absolute;
+  inset: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6em;
+  color: var(--accent-red);
+  opacity: 0.92;
+  pointer-events: none;
+  transform: translateY(3px);
 }
 
 @keyframes pulse-heart {
@@ -544,11 +629,11 @@ img {
   }
 
   .photo-frame {
-    width: min(280px, 90vw);
+    width: min(380px, 92vw);
   }
 
   .wedding-photo {
-    min-height: 180px;
+    min-height: 260px;
   }
 
   .family-columns {
@@ -565,9 +650,14 @@ img {
     margin-bottom: 2rem;
   }
 
-  .calendar {
+  .calendar,
+  .party-layout {
     padding: 1rem;
     max-width: 100%;
+  }
+
+  .party-layout {
+    grid-template-columns: 1fr;
   }
 
   .cal-day {
