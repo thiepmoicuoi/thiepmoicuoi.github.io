@@ -618,55 +618,67 @@ img {
 }
 
 .cal-day-wedding {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.95);
   color: var(--accent-red);
   font-weight: 600;
-  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   position: relative;
+  z-index: 1;
 }
 
-/* Trái tim viền (Font Awesome) — nằm phía sau số, hiệu ứng pulse 1.5s */
+/* Lớp nền trái tim mờ (phía sau) */
+.cal-day-wedding::after {
+  content: '\f004';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 400;
+  position: absolute;
+  inset: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8em;
+  color: var(--accent-red);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-text-stroke: 1px rgba(196, 30, 58, 0.2);
+}
+
+/* Trái tim chính — viền rõ, nằm sau số, có hiệu ứng pulse đẹp */
 .cal-day-wedding::before {
   content: '\f004';
   font-family: 'Font Awesome 6 Free';
   font-weight: 400;
   position: absolute;
-  inset: -8px;
+  inset: -6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.6em;
+  font-size: 2.75em;
   color: var(--accent-red);
-  opacity: 0.92;
+  opacity: 0.95;
   pointer-events: none;
-  transform: translateY(3px);
-  animation: pulse-heart-shape 1.5s ease-in-out infinite;
+  z-index: 0;
+  transform: translateY(2px);
+  -webkit-text-stroke: 2px var(--accent-red);
+  animation: pulse-heart-shape 1.2s ease-in-out infinite;
 }
 
-/* Hiệu ứng pulse 1.5s — ít keyframe, nhẹ hơn trên mobile */
+/* Số 14 luôn nổi trên trái tim */
+.cal-day-wedding {
+  isolation: isolate;
+}
+
+/* Hiệu ứng trái tim: phát sáng nhẹ + scale nhẹ, mượt và rõ ràng */
 @keyframes pulse-heart-shape {
   0%, 100% {
-    opacity: 0.88;
+    transform: translateY(2px) scale(1);
+    filter: drop-shadow(0 0 4px rgba(196, 30, 58, 0.5)) drop-shadow(0 0 12px rgba(196, 30, 58, 0.3));
+    opacity: 0.92;
   }
   50% {
-    opacity: 1;
-  }
-}
-
-/* Desktop: thêm drop-shadow nhẹ (không dùng trên mobile để tránh lag) */
-@media (min-width: 769px) {
-  .cal-day-wedding::before {
-    animation: pulse-heart-shape-desktop 1.5s ease-in-out infinite;
-  }
-}
-
-@keyframes pulse-heart-shape-desktop {
-  0%, 100% {
-    filter: drop-shadow(0 0 4px rgba(196, 30, 58, 0.5));
-    opacity: 0.88;
-  }
-  50% {
-    filter: drop-shadow(0 0 10px rgba(196, 30, 58, 0.6));
+    transform: translateY(2px) scale(1.08);
+    filter: drop-shadow(0 0 8px rgba(196, 30, 58, 0.7)) drop-shadow(0 0 20px rgba(196, 30, 58, 0.45));
     opacity: 1;
   }
 }
@@ -722,6 +734,15 @@ img {
   .cal-day {
     font-size: 0.8rem;
   }
+
+  .cal-day-wedding::before {
+    font-size: 2.4em;
+    inset: -4px;
+  }
+
+  .cal-day-wedding::after {
+    font-size: 2.5em;
+  }
 }
 
 @media (max-width: 480px) {
@@ -743,5 +764,13 @@ img {
 
   .cal-day {
     font-size: 0.75rem;
+  }
+
+  .cal-day-wedding::before {
+    font-size: 2.1em;
+  }
+
+  .cal-day-wedding::after {
+    font-size: 2.2em;
   }
 }
