@@ -42,15 +42,18 @@
     }
   }
 
-  // ---------- Section 1: Người nhận từ URL params (address = cách xưng hô, name = tên) ----------
+  // ---------- Section 1: Người nhận từ URL params (x = cách xưng hô, name = tên) ----------
+  // x: a = Anh, c = Chị, b = Bạn, vc = Vợ chồng anh
+  var xToLabel = { a: 'Anh', c: 'Chị', b: 'Bạn', vc: 'Vợ chồng anh' };
   var recipientEl = document.getElementById('intro-recipient');
   if (recipientEl) {
     var params = new URLSearchParams(window.location.search);
-    var address = (params.get('address') || '').trim();
+    var x = (params.get('x') || '').trim().toLowerCase();
     var name = (params.get('name') || '').trim();
+    var address = xToLabel[x] || '';
     if (address || name) {
       var parts = [address, name].filter(Boolean);
-      recipientEl.textContent = 'Kính mời ' + parts.join(' ');
+      recipientEl.textContent = parts.join(' ');
       recipientEl.removeAttribute('aria-hidden');
       recipientEl.classList.add('visible');
     }

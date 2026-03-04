@@ -240,6 +240,14 @@ img {
   max-width: 90vw;
 }
 
+.intro-invite-label {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+  font-style: italic;
+}
+
 .intro-title {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 4rem);
@@ -274,6 +282,14 @@ img {
   font-size: clamp(2rem, 4.5vw, 3rem);
   color: var(--text-muted);
   margin-bottom: 0.25rem;
+}
+
+.chu-hy {
+  display: inline-block;
+  font-size: 0.85em;
+  color: inherit;
+  margin: 0 0.15em;
+  vertical-align: middle;
 }
 
 .intro-date {
@@ -342,6 +358,17 @@ img {
   line-height: 1.4;
 }
 
+.family-names .family-name-line {
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.family-names .chu-hy {
+  display: block;
+  margin: 0.2em 0;
+  font-size: 0.6em;
+}
+
 .family-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -389,7 +416,18 @@ img {
   width: 100%;
 }
 
-.party-content,
+.party-content {
+  text-align: center;
+  max-width: 700px;
+  width: 100%;
+  background: rgba(255, 248, 240, 0.85);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow-soft);
+  border: 2px solid #1a365d;
+  backdrop-filter: blur(8px);
+}
+
 .calendar-content {
   text-align: center;
   max-width: 700px;
