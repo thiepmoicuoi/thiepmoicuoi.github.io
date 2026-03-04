@@ -621,10 +621,9 @@ img {
   font-weight: 600;
   border: none;
   position: relative;
-  animation: pulse-heart 1.5s ease-in-out infinite;
 }
 
-/* Trái tim viền (Font Awesome) — nằm phía sau số */
+/* Trái tim viền (Font Awesome) — nằm phía sau số, hiệu ứng chớp theo hình trái tim */
 .cal-day-wedding::before {
   content: '\f004';
   font-family: 'Font Awesome 6 Free';
@@ -639,14 +638,18 @@ img {
   opacity: 0.92;
   pointer-events: none;
   transform: translateY(3px);
+  animation: pulse-heart-shape 1.5s ease-in-out infinite;
 }
 
-@keyframes pulse-heart {
+/* Hiệu ứng chớp theo hình trái tim (drop-shadow bám theo outline trái tim) */
+@keyframes pulse-heart-shape {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(196, 30, 58, 0.35);
+    filter: drop-shadow(0 0 0 rgba(196, 30, 58, 0.5)) drop-shadow(0 0 6px rgba(196, 30, 58, 0.35));
+    opacity: 0.92;
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(196, 30, 58, 0);
+    filter: drop-shadow(0 0 4px rgba(196, 30, 58, 0.8)) drop-shadow(0 0 14px rgba(196, 30, 58, 0.5));
+    opacity: 1;
   }
 }
 
