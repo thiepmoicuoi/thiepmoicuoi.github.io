@@ -59,6 +59,37 @@
     }
   }
 
+  // ---------- Đếm ngược đến 18:00 ngày 03/07/2026 (section 4 desktop / section 5 mobile) ----------
+  var countdownTarget = new Date(2026, 6, 3, 18, 0, 0, 0);
+  var countdownDaysEls = document.querySelectorAll('.countdown-value-days');
+  var countdownHoursEls = document.querySelectorAll('.countdown-value-hours');
+  var countdownMinutesEls = document.querySelectorAll('.countdown-value-minutes');
+  var countdownSecondsEls = document.querySelectorAll('.countdown-value-seconds');
+
+  function updateCountdown() {
+    var now = new Date();
+    var diff = countdownTarget - now;
+    var days = 0;
+    var hours = 0;
+    var minutes = 0;
+    var seconds = 0;
+    if (diff > 0) {
+      days = Math.floor(diff / (24 * 60 * 60 * 1000));
+      hours = Math.floor((diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+      minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
+      seconds = Math.floor((diff % (60 * 1000)) / 1000);
+    }
+    countdownDaysEls.forEach(function (el) { el.textContent = days; });
+    countdownHoursEls.forEach(function (el) { el.textContent = hours; });
+    countdownMinutesEls.forEach(function (el) { el.textContent = minutes; });
+    countdownSecondsEls.forEach(function (el) { el.textContent = seconds; });
+  }
+
+  if (countdownDaysEls.length || countdownHoursEls.length || countdownMinutesEls.length || countdownSecondsEls.length) {
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  }
+
   // ---------- AOS init ----------
   AOS.init({
     duration: 800,
