@@ -455,21 +455,37 @@ img {
   line-height: 1.8;
 }
 
-/* ========== SECTION 3 – BỮA TIỆC & NGÀY CƯỚI ========== */
-.section-party {
-  background: transparent;
-}
-
-.party-layout {
+/* ========== SECTION 4 – BỮA TIỆC & NGÀY CƯỚI ========== */
+/* Desktop: 1 khối 2 cột; Mobile: 2 section riêng (xem media query) */
+.party-calendar-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem 2rem;
   align-items: stretch;
   max-width: 900px;
   width: 100%;
-  max-height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  scroll-snap-align: start;
+  box-sizing: border-box;
+}
+
+.party-calendar-wrapper .section-party,
+.party-calendar-wrapper .section-calendar {
+  min-height: auto;
+  max-height: none;
+  scroll-snap-align: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-party,
+.section-calendar {
+  background: transparent;
 }
 
 .party-content {
@@ -515,13 +531,15 @@ img {
   font-size: clamp(1.6rem, 4vw, 2rem);
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.85rem;
+  line-height: 1.8;
 }
 
 .party-lunar {
   font-size: clamp(0.8rem, 1.8vw, 0.95rem);
   color: var(--text-muted);
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.65rem;
+  line-height: 2.1;
 }
 
 .party-venue-name {
@@ -529,13 +547,15 @@ img {
   font-size: clamp(1rem, 2vw, 1.15rem);
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.95rem;
+  line-height: 2;
 }
 
 .party-venue {
   font-family: var(--font-body);
   font-size: clamp(1rem, 2vw, 1.15rem);
   color: var(--text);
+  line-height: 2;
 }
 
 .calendar-title {
@@ -789,14 +809,32 @@ img {
     margin-bottom: 2rem;
   }
 
-  .calendar,
-  .party-layout {
+  .calendar {
     padding: 1rem;
     max-width: 100%;
   }
 
-  .party-layout {
-    grid-template-columns: 1fr;
+  /* Mobile: tách Bữa tiệc & Ngày vui thành 2 section full màn hình */
+  .party-calendar-wrapper {
+    display: block;
+    grid-template-columns: none;
+    min-height: auto;
+    padding: 0;
+    max-width: none;
+    scroll-snap-align: none;
+  }
+
+  .party-calendar-wrapper .section-party,
+  .party-calendar-wrapper .section-calendar {
+    min-height: 100vh;
+    min-height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    scroll-snap-align: start;
+    padding: 2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .cal-day {

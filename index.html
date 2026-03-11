@@ -38,8 +38,6 @@
     <!-- ========== SECTION 2 – THÔNG TIN KHÁCH MỜI ========== -->
     <section id="guest" class="section section-guest">
       <div class="guest-content">
-        <h2 class="guest-title" data-aos="fade-down" data-aos-duration="800">Thông tin khách mời</h2>
-        <div class="intro-divider" aria-hidden="true"></div>
         <p class="guest-invite-label">Trân trọng kính mời:</p>
         <p class="guest-recipient" id="guest-recipient" aria-hidden="true"></p>
       </div>
@@ -68,12 +66,12 @@
       </div>
     </section>
 
-    <!-- ========== SECTION 4 – BỮA TIỆC & NGÀY CƯỚI ========== -->
-    <section id="party" class="section section-party">
-      <div class="party-layout">
+    <!-- ========== SECTION 4 – BỮA TIỆC & NGÀY CƯỚI (desktop: 1 khối; mobile: 2 section) ========== -->
+    <div class="party-calendar-wrapper">
+      <section id="party" class="section section-party">
         <div class="party-content">
           <h2 class="party-title" data-aos="fade-down" data-aos-duration="800">BỮA TIỆC THÂN MẬT</h2>
-            <div class="intro-divider" aria-hidden="true"></div>
+          <div class="intro-divider" aria-hidden="true"></div>
           <div class="party-info" data-aos="fade-up" data-aos-duration="600">
             <p class="party-time">18:00 - Thứ Sáu</p>
             <p class="party-date">03.07.2026</p>
@@ -83,10 +81,12 @@
             <p class="party-venue">421 Ngô Gia Tự, Phường An Đông, Thành phố Hồ Chí Minh</p>
           </div>
         </div>
+      </section>
 
+      <section id="calendar" class="section section-calendar">
         <div class="calendar-content">
           <h2 class="calendar-title" data-aos="fade-down" data-aos-duration="800">NGÀY VUI CỦA CHÚNG TÔI</h2>
-            <div class="intro-divider" aria-hidden="true"></div>
+          <div class="intro-divider" aria-hidden="true"></div>
           <!-- Lịch tháng 7/2026 - ngày 03 khoanh trái tim -->
           <div class="calendar-wrapper" data-aos="fade-up" data-aos-duration="600" data-aos-delay="150">
             <div class="calendar">
@@ -132,8 +132,8 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
     <!-- ========== SECTION 5 – BẢN ĐỒ ========== -->
     <section id="map" class="section section-map">
