@@ -42,10 +42,10 @@
     }
   }
 
-  // ---------- Section 1: Người nhận từ URL params (x = cách xưng hô, n = tên) ----------
+  // ---------- Section 2 (Thông tin khách mời): Người nhận từ URL params (x = cách xưng hô, n = tên) ----------
   // x: a = Anh, c = Chị, b = Bạn, vc = Vợ chồng anh
   var xToLabel = { a: 'Anh', c: 'Chị', b: 'Bạn', vc: 'Vợ chồng anh' };
-  var recipientEl = document.getElementById('intro-recipient');
+  var recipientEl = document.getElementById('guest-recipient');
   if (recipientEl) {
     var params = new URLSearchParams(window.location.search);
     var x = (params.get('x') || '').trim().toLowerCase();

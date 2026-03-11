@@ -9,6 +9,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -67,7 +68,6 @@ img {
 
 /* ========== PAGE WRAPPER & SECTIONS ========== */
 .page-wrapper {
-  scroll-snap-type: y mandatory;
   min-height: 100vh;
   background-size: 100% 100%;
 }
@@ -75,15 +75,19 @@ img {
 .section {
   min-height: 100vh;
   min-height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem 1.5rem;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
   position: relative;
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+  overflow: hidden;
 }
 
 .section.section-visible {
@@ -238,14 +242,14 @@ img {
 .intro-content {
   text-align: center;
   max-width: 90vw;
-}
-
-.intro-invite-label {
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  color: var(--text-muted);
-  margin-bottom: 0.35rem;
-  font-style: italic;
+  max-height: calc(100vh - 4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  gap: 0;
 }
 
 .intro-title {
@@ -254,26 +258,58 @@ img {
   color: var(--text);
   margin-bottom: 0.5rem;
   font-weight: 400;
+  flex-shrink: 0;
 }
 
 .intro-divider {
   width: 80px;
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--text-muted), transparent);
-  margin: 0.75rem auto 1rem;
+  margin: 0.5rem auto;
   border-radius: 1px;
+  flex-shrink: 0;
 }
 
-.intro-recipient {
-  display: none;
+/* ========== SECTION 2 – THÔNG TIN KHÁCH MỜI ========== */
+.section-guest {
+  background: transparent;
+}
+
+.guest-content {
+  text-align: center;
+  max-width: 90vw;
+  max-height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.guest-title {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.guest-invite-label {
   font-family: var(--font-body);
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: var(--text-muted);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.35rem;
   font-style: italic;
 }
 
-.intro-recipient.visible {
+.guest-recipient {
+  display: none;
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  color: var(--text);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.guest-recipient.visible {
   display: block;
 }
 
@@ -281,7 +317,9 @@ img {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4.5vw, 3rem);
   color: var(--text-muted);
+  margin-top: 1.25rem;
   margin-bottom: 0.25rem;
+  flex-shrink: 0;
 }
 
 .chu-hy {
@@ -297,28 +335,39 @@ img {
   font-size: clamp(1rem, 2vw, 1.25rem);
   letter-spacing: 0.15em;
   color: var(--text-muted);
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
+  flex-shrink: 0;
 }
 
-/* ----- Ảnh cưới (chỉ bo góc, không viền) ----- */
+/* ----- Ảnh cưới (giữ tỉ lệ, không tràn màn hình) ----- */
 .photo-frame-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1.5rem;
+  margin-top: 0.75rem;
+  flex-shrink: 1;
+  min-height: 0;
+  max-width: min(480px, 92vw);
+  max-height: min(50vh, 480px);
 }
 
 .photo-frame {
   position: relative;
-  width: min(480px, 92vw);
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wedding-photo {
   display: block;
-  width: 100%;
+  max-width: 100%;
+  max-height: min(50vh, 480px);
+  width: auto;
   height: auto;
-  min-height: 320px;
-  object-fit: cover;
+  min-height: 0;
+  object-fit: contain;
   border-radius: var(--radius-lg);
   opacity: 0;
   transform: translateY(12px);
@@ -339,6 +388,9 @@ img {
   text-align: center;
   max-width: 900px;
   width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .family-title {
@@ -415,6 +467,9 @@ img {
   align-items: stretch;
   max-width: 900px;
   width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .party-content {
@@ -501,12 +556,15 @@ img {
   text-align: center;
   max-width: 800px;
   width: 100%;
+  max-height: 100%;
   padding: 2rem 1.5rem;
   background: rgba(255, 248, 240, 0.9);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
   border: 2px solid #1a365d;
   backdrop-filter: blur(8px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .map-title {
@@ -707,12 +765,14 @@ img {
     margin-top: 2rem;
   }
 
-  .photo-frame {
-    width: min(380px, 92vw);
+  .photo-frame-wrapper {
+    margin-top: 2rem;
+    max-width: min(380px, 92vw);
+    max-height: min(45vh, 380px);
   }
 
   .wedding-photo {
-    min-height: 260px;
+    max-height: min(45vh, 380px);
   }
 
   .family-columns {
