@@ -1,7 +1,8 @@
 (function () {
   'use strict';
 
-  // ---------- Nhạc nền + nút nhạc nổi: thử phát khi load, nếu bị chặn thì phát khi user tương tác ----------
+  // ---------- Nhạc nền + nút nhạc nổi ----------
+
   var bgMusic = document.getElementById('bg-music');
   var floatingMusicBtn = document.getElementById('floating-music');
   function updateMusicButtonState() {
@@ -42,24 +43,53 @@
     }
   }
 
-  // ---------- Section 2 (Thông tin khách mời): Người nhận từ URL params (x = cách xưng hô, n = tên) ----------
-  // x: a = Anh, c = Chị, b = Bạn, vc = Vợ chồng anh
-  var xToLabel = { a: 'Anh', c: 'Chị', b: 'Bạn', vc: 'Vợ chồng anh' };
+  // ---------- Section 2 (Thông tin khách mời) ----------
+
   var recipientEl = document.getElementById('guest-recipient');
-  if (recipientEl) {
-    var params = new URLSearchParams(window.location.search);
-    var x = (params.get('x') || '').trim().toLowerCase();
-    var name = (params.get('n') || '').trim();
-    var address = xToLabel[x] || '';
-    if (address || name) {
+
+  function setGuestRecipient(address, name, line) {
+    if (!recipientEl) return;
+    var text = '';
+    if (line && String(line).trim()) {
+      text = String(line).trim();
+    } else {
       var parts = [address, name].filter(Boolean);
-      recipientEl.textContent = parts.join(' ');
+      text = parts.join(' ');
+    }
+    if (text) {
+      recipientEl.textContent = text;
       recipientEl.removeAttribute('aria-hidden');
       recipientEl.classList.add('visible');
     }
   }
 
-  // ---------- Đếm ngược đến 18:00 ngày 03/07/2026 (section 4 desktop / section 5 mobile) ----------
+  if (recipientEl) {
+    var params = new URLSearchParams(window.location.search);
+    var guestId = (params.get('i') || '').trim().toLowerCase();
+    // Mã khách: đúng 5 ký tự a-z hoặc 0-9
+    var idOk = /^[a-z0-9]{5}$/.test(guestId);
+
+    if (idOk) {
+      fetch('guests.json', { cache: 'no-store' })
+        .then(function (res) {
+          if (!res.ok) throw new Error('guests.json ' + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          var row = data && data[guestId];
+          if (!row || typeof row !== 'object') return;
+          var line = row.line;
+          var address = String(row.x != null ? row.x : '').trim();
+          var name = String(row.n != null ? row.n : '').trim();
+          setGuestRecipient(address, name, line);
+        })
+        .catch(function () {
+        });
+    }
+  }
+
+  // ---------- Đếm ngược đến 18:00 ngày 03/07/2026 ----------
+
   var countdownTarget = new Date(2026, 6, 3, 18, 0, 0, 0);
   var countdownDaysEls = document.querySelectorAll('.countdown-value-days');
   var countdownHoursEls = document.querySelectorAll('.countdown-value-hours');
@@ -91,6 +121,7 @@
   }
 
   // ---------- AOS init ----------
+
   AOS.init({
     duration: 800,
     easing: 'ease-out',
@@ -99,6 +130,7 @@
   });
 
   // ---------- Section reveal on scroll + nút cuộn xuống ----------
+
   var sections = document.querySelectorAll('.section');
   var floatingScrollBtn = document.getElementById('floating-scroll');
   var currentSectionIndex = 0;
