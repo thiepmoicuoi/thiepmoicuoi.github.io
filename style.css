@@ -44,24 +44,21 @@ img {
 
 /* ========== CSS VARIABLES ========== */
 :root {
-  /* Nền kem trung tính */
-  --cream: #f7fbf5;
-  --cream-light: #f9fff6;
-  --cream-warm: #ecf7ea;
-  /* Tông xanh pastel chủ đạo */
-  --pink-pastel: #c4e8cf;
-  --pink-pastel-dark: #9ed3b0;
-  --yellow-light: #d3f0df;
-  --yellow-light-2: #e5f7eb;
-  /* Giữ tim viền đỏ cho điểm nhấn */
-  --accent-red: #C41E3A;
-  /* Chữ nâu đậm, hợp nền xanh-kem */
-  --text: #445040;
-  --text-muted: #70806a;
+  --cream: #fffafa;
+  --cream-light: #ffffff;
+  --cream-warm: #fff5f5;
+  --pink-pastel: #ffe4e6;
+  --pink-pastel-dark: #fecdd3;
+  --yellow-light: #ffe8ea;
+  --yellow-light-2: #fff1f2;
+  --accent-red: #b91c1c;
+  --line-red: #991b1b;
+  --text: #450a0a;
+  --text-muted: #7f1d1d;
   --font-display: 'Great Vibes', cursive;
   --font-body: 'Playfair Display', Georgia, serif;
-  --shadow-soft: 0 8px 32px rgba(92, 74, 66, 0.12);
-  --shadow-photo: 0 12px 40px rgba(92, 74, 66, 0.18);
+  --shadow-soft: 0 8px 32px rgba(153, 27, 27, 0.1);
+  --shadow-photo: 0 12px 40px rgba(127, 29, 29, 0.14);
   --radius: 12px;
   --radius-lg: 20px;
 }
@@ -145,9 +142,9 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 248, 240, 0.95);
+  background: rgba(255, 255, 255, 0.96);
   color: var(--text);
-  border: 1px solid rgba(232, 196, 184, 0.6);
+  border: 1px solid rgba(185, 28, 28, 0.28);
   box-shadow: var(--shadow-soft);
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, color 0.2s;
@@ -157,7 +154,7 @@ img {
 
 .floating-btn:hover {
   transform: scale(1.08);
-  box-shadow: 0 12px 36px rgba(92, 74, 66, 0.18);
+  box-shadow: 0 12px 36px rgba(127, 29, 29, 0.16);
   color: var(--text);
 }
 
@@ -252,6 +249,32 @@ img {
   gap: 0;
 }
 
+.intro-married-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: min(520px, 88vw);
+  margin-top: 0.75rem;
+  flex-shrink: 0;
+}
+
+.intro-married-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(18vh, 120px);
+  object-fit: contain;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section-intro.section-visible .intro-married-img {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .intro-title {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 4rem);
@@ -273,14 +296,44 @@ img {
 /* ========== SECTION 2 – THÔNG TIN KHÁCH MỜI ========== */
 .section-guest {
   background: transparent;
+  align-items: stretch;
+  justify-content: center;
+  padding: 2rem 1.5rem calc(4.75rem + env(safe-area-inset-bottom, 0px));
 }
 
 .guest-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 1 auto;
+  align-self: stretch;
+  min-height: 0;
   text-align: center;
   max-width: 90vw;
-  max-height: 100%;
+  width: 100%;
+  margin: 0 auto;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+.guest-lower {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.guest-wedding-img {
+  display: block;
+  max-width: min(320px, 85vw);
+  width: auto;
+  height: auto;
+  max-height: min(38vh, 340px);
+  margin-bottom: 0.45rem;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .guest-title {
@@ -297,8 +350,11 @@ img {
   font-size: clamp(1.15rem, 2.8vw, 1.5rem);
   letter-spacing: 0.2em;
   color: var(--text-muted);
-  margin-bottom: 0.35rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0;
   font-weight: 700;
+  flex-shrink: 0;
+  width: 100%;
 }
 
 .guest-recipient {
@@ -306,78 +362,30 @@ img {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4.5vw, 3rem);
   color: var(--text);
-  margin-top: 0.75rem;
+  margin-top: 0;
+  flex-shrink: 0;
+  width: 100%;
 }
 
 .guest-recipient.visible {
   display: block;
 }
 
-/* ----- Ảnh cặp đôi section 2: 2 cột, viền trắng, đổ bóng, trượt từ 2 bên ----- */
-.guest-photos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem 0.5rem;
-  max-width: 560px;
-  margin: 2rem auto 0;
-  justify-items: center;
+.guest-message {
+  max-width: 32rem;
+  margin: 0.65rem auto 0;
+  padding: 0 0.75rem;
 }
 
-.guest-photo-col {
-  width: 100%;
-  max-width: 260px;
+.guest-message p {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: var(--text);
+  line-height: 1.85;
 }
 
-.guest-photo-frame {
-  position: relative;
-  overflow: hidden;
-  border: 3px solid #fff;
-  box-shadow: var(--shadow-photo), 0 4px 20px rgba(0, 0, 0, 0.15);
-  background: #fff;
-}
-
-.guest-photo-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  vertical-align: middle;
-}
-
-/* Trượt từ ngoài màn hình vào: dùng transition của mình, tắt animation AOS để thấy chậm rõ */
-.guest-photo-col[data-aos="fade-left"],
-.guest-photo-col[data-aos="fade-right"] {
-  animation: none !important;
-}
-.guest-photo-col[data-aos="fade-left"] {
-  opacity: 0;
-  transform: translateX(-100%);
-  transition: opacity 3.2s ease-out, transform 3.2s ease-out;
-}
-.guest-photo-col[data-aos="fade-left"].aos-animate {
-  opacity: 1;
-  transform: translateX(0);
-}
-.guest-photo-col[data-aos="fade-right"] {
-  opacity: 0;
-  transform: translateX(100%);
-  transition: opacity 3.2s ease-out, transform 3.2s ease-out;
-}
-.guest-photo-col[data-aos="fade-right"].aos-animate {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-@media (max-width: 600px) {
-  .guest-photos {
-    gap: 0.5rem 0.5rem;
-    max-width: 90vw;
-  }
-
-  .guest-photo-col {
-    max-width: none;
-  }
+.guest-message p + p {
+  margin-top: 0.9rem;
 }
 
 /* ----- Countdown circles ----- */
@@ -394,8 +402,8 @@ img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: rgba(255, 248, 240, 0.9);
-  border: 2px solid #1a365d;
+  background: rgba(255, 255, 255, 0.93);
+  border: 2px solid var(--line-red);
   box-shadow: var(--shadow-soft);
   display: flex;
   flex-direction: column;
@@ -537,11 +545,11 @@ img {
 }
 
 .family-col {
-  background: rgba(255, 248, 240, 0.7);
+  background: rgba(255, 255, 255, 0.9);
   padding: 2rem 1.5rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
-  border: 2px solid #1a365d;
+  border: 2px solid var(--line-red);
   backdrop-filter: blur(8px);
 }
 
@@ -559,6 +567,18 @@ img {
   font-size: clamp(0.85rem, 1.8vw, 1rem);
   color: var(--text);
   line-height: 1.8;
+}
+
+.family-closing {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-top: 2.25rem;
+  line-height: 1.65;
+  max-width: 34em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ========== SECTION 4 – BỮA TIỆC & NGÀY CƯỚI ========== */
@@ -619,11 +639,11 @@ img {
   text-align: center;
   max-width: 700px;
   width: 100%;
-  background: rgba(255, 248, 240, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   border-radius: var(--radius-lg);
   padding: 2rem 1.5rem;
   box-shadow: var(--shadow-soft);
-  border: 2px solid #1a365d;
+  border: 2px solid var(--line-red);
   backdrop-filter: blur(8px);
 }
 
@@ -631,11 +651,11 @@ img {
   text-align: center;
   max-width: 700px;
   width: 100%;
-  background: rgba(255, 248, 240, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   border-radius: var(--radius-lg);
   padding: 2rem 1.5rem;
   box-shadow: var(--shadow-soft);
-  border: 2px solid #1a365d;
+  border: 2px solid var(--line-red);
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
@@ -707,10 +727,10 @@ img {
   width: 100%;
   max-height: 100%;
   padding: 2rem 1.5rem;
-  background: rgba(255, 248, 240, 0.9);
+  background: rgba(255, 255, 255, 0.94);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
-  border: 2px solid #1a365d;
+  border: 2px solid var(--line-red);
   backdrop-filter: blur(8px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -761,16 +781,16 @@ img {
   padding: 0.6rem 1.2rem;
   font-family: var(--font-body);
   font-size: 0.9rem;
-  color: var(--text);
-  background: var(--pink-pastel);
+  color: #ffffff;
+  background: var(--accent-red);
   border-radius: 999px;
   text-decoration: none;
   transition: background 0.2s, transform 0.2s;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(153, 27, 27, 0.1);
 }
 
 .map-link:hover {
-  background: var(--pink-pastel-dark);
+  background: var(--line-red);
   transform: translateY(-2px);
 }
 
@@ -786,7 +806,7 @@ img {
   box-shadow: var(--shadow-soft);
   max-width: 360px;
   margin: 0 auto;
-  border: 2px solid #1a365d;
+  border: 2px solid var(--line-red);
 }
 
 .calendar-header {
@@ -824,7 +844,7 @@ img {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 6px;
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(153, 27, 27, 0.1);
 }
 
 .cal-day.empty {
@@ -856,7 +876,7 @@ img {
   opacity: 0.25;
   pointer-events: none;
   z-index: 0;
-  -webkit-text-stroke: 1px rgba(196, 30, 58, 0.2);
+  -webkit-text-stroke: 1px rgba(185, 28, 28, 0.22);
 }
 
 /* Trái tim chính — viền rõ, nằm sau số, có hiệu ứng pulse đẹp */
@@ -888,12 +908,12 @@ img {
 @keyframes pulse-heart-shape {
   0%, 100% {
     transform: translateY(2px) scale(1);
-    filter: drop-shadow(0 0 4px rgba(196, 30, 58, 0.5)) drop-shadow(0 0 12px rgba(196, 30, 58, 0.3));
+    filter: drop-shadow(0 0 4px rgba(185, 28, 28, 0.5)) drop-shadow(0 0 12px rgba(185, 28, 28, 0.3));
     opacity: 0.92;
   }
   50% {
     transform: translateY(2px) scale(1.08);
-    filter: drop-shadow(0 0 8px rgba(196, 30, 58, 0.7)) drop-shadow(0 0 20px rgba(196, 30, 58, 0.45));
+    filter: drop-shadow(0 0 8px rgba(185, 28, 28, 0.7)) drop-shadow(0 0 20px rgba(185, 28, 28, 0.45));
     opacity: 1;
   }
 }
@@ -908,12 +928,20 @@ img {
 
   .countdown-wrapper {
     margin-top: 1.5rem;
-    gap: 0.75rem 1rem;
+    flex-wrap: nowrap;
+    gap: 0.4rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .countdown-circle {
-    width: 64px;
-    height: 64px;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 64px;
+    width: auto;
+    height: auto;
+    aspect-ratio: 1;
   }
 
   .countdown-value {
